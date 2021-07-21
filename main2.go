@@ -12,5 +12,6 @@ func main() {
 
 func hello(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "v0.0.2 : Hello, %s", r.URL.Path[1:])
+  
   fmt.Fprintf(w, "v0.0.2 : Hello, %s", r.URL.Path[1:])
 }

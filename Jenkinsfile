@@ -7,11 +7,9 @@ pipeline {
       }
     }
 
-    stage('') {
+    stage('error') {
       steps {
-        sh '''# Build the image
-$(aws ecr get-login --region eu-west-1 --profile global --no-include-email)
-docker build . -t k8s-debian-test'''
+        sh 'ls'
       }
     }
 

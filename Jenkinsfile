@@ -9,4 +9,3 @@ pipeline {
 
   }
 }
-© 2021 GitHub, I

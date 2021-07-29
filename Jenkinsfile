@@ -3,7 +3,9 @@ pipeline {
   stages {
     stage('ttt') {
       steps {
-        sh 'docker build . -t k8s-debian-test'
+        sh '''ssh host -t "docker ps"
+
+#docker build . -t k8s-debian-test'''
       }
     }
 

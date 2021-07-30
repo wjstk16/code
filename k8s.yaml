@@ -1,0 +1,41 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: test-server
+  namespace: agric
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: test-server
+    spec:
+      containers:
+        - name: test-server
+          image: hustakin/test:<BUILD_TAG>
+          env:
+            - name: branch
+              value: <BRANCH_NAME>
+          ports:
+            - containerPort: 80
+              protocol: TCP
+              name: web
+            - containerPort: 443
+              protocol: TCP
+              name: https
+          # inventory probe
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 5
+      imagePullSecrets:
+        - name: docker-hub
